@@ -22,22 +22,24 @@
     <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql -->
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-sql_2.12</artifactId>
-      <version>3.1.2</version>
+      <artifactId>spark-sql_2.13</artifactId>
+      <version>3.3.1</version>
       <scope>provided</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-core_2.12</artifactId>
-      <version>3.1.2</version>
+      <artifactId>spark-core_2.13</artifactId>
+      <version>3.3.1</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql-kafka-0-10 -->
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-sql-kafka-0-10_2.12</artifactId>
-      <version>3.1.2</version>
+      <artifactId>spark-sql-kafka-0-10_2.13</artifactId>
+      <version>3.3.1</version>
+      <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>com.typesafe</groupId>
       <artifactId>config</artifactId>
@@ -100,7 +102,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>org.microsoft.kafkaSpark.lab.main</mainClass>
+              <mainClass>org.microsoft.kafkaSpark.lab.kafkaSparkProducer</mainClass>
             </manifest>
           </archive>
         </configuration>

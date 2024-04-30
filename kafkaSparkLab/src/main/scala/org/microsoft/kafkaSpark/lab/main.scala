@@ -26,40 +26,6 @@ object main {
       throw new FileNotFoundException("Properties file cannot be loaded")
     }
 
-    val brokerServers = properties.getProperty("broker_servers")
-    val topics = properties.getProperty("topic")
-    val startingOffset = properties.getProperty("starting_offset")
 
-    val spark = SparkSession.builder()
-      .master("yarn")
-      .appName("Test Broadcast").getOrCreate()
-
-    val df = spark.readStream
-      .format("kafka")
-      .option("kafka.bootstrap.servers", brokerServers)
-      .option("subscribe", topics)
-      .option("startingOffsets", startingOffset) // From starting
-      .load()
-
-    val personStringDf = df.selectExpr("CAST(value As STRING)")
-
-    val schema = new StructType()
-      .add("id",IntegerType)
-      .add("firstname",StringType)
-      .add("middlename",StringType)
-      .add("lastname",StringType)
-      .add("dob_year",IntegerType)
-      .add("dob_month",IntegerType)
-      .add("gender",StringType)
-      .add("salary",IntegerType)
-
-    val personDF = personStringDf.select(from_json(col("value"), schema).as("data"))
-      .select("data.*")
-
-    personDF.writeStream
-      .format("console")
-      .outputMode("append")
-      .start()
-      .awaitTermination()
   }
 }
